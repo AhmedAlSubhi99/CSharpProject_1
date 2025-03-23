@@ -74,8 +74,10 @@ namespace SimpleStudentManagementProject
             //======== Add New Student ==========
             static void AddNewStudent()
             {
-                Console.WriteLine("Add New Student");
-                Console.WriteLine("-----------------");
+                Console.WriteLine("=======================================");
+                Console.WriteLine("Hello For Adding New Student cheers!!(-_-) ");
+                Console.WriteLine("=======================================");
+
                 while (true)
                 {
                     if (count == 10)
@@ -122,6 +124,10 @@ namespace SimpleStudentManagementProject
             //======== View All Students ==========
             static void ViewAllStudents()
             {
+                Console.WriteLine("=======================================");
+                Console.WriteLine("Hello For Viewing All Students");
+                Console.WriteLine("=======================================");
+
                 Console.WriteLine("-------------------------------------------------");
                 Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
                 Console.WriteLine("-------------------------------------------------");
@@ -135,6 +141,10 @@ namespace SimpleStudentManagementProject
             //======== Find Student By Name ==========
             static void FindStudentByName()
             {
+                Console.WriteLine("=======================================");
+                Console.WriteLine("Hello For Find Student By Name");
+                Console.WriteLine("=======================================");
+
                 Console.Write("Enter student name to search: ");
                 string searchName = Console.ReadLine().ToLower();
                 bool found = false;
@@ -160,6 +170,10 @@ namespace SimpleStudentManagementProject
             //======== Calculate Class Average ==========
             static void CalculateClassAverage()
             {
+                Console.WriteLine("=======================================");
+                Console.WriteLine("Hello For Calculate Class Average");
+                Console.WriteLine("=======================================");
+
                 double sum = 0;
                 for (int i = 0; i < count; i++)
                 {
@@ -172,6 +186,9 @@ namespace SimpleStudentManagementProject
             //======== Find Top Performing Student ==========
             static void FindTopPerformingStudent()
             {
+                Console.WriteLine("=======================================");
+                Console.WriteLine("Hello For Finding Top Performing Student");
+                Console.WriteLine("=======================================");
 
                 double max = 0;
                 int index = -1;
@@ -196,7 +213,7 @@ namespace SimpleStudentManagementProject
             static void SortStudentsByMarksDescending()
             {
                 Console.WriteLine("=======================================");
-                Console.WriteLine("Sorting Students By Marks Descending");
+                Console.WriteLine("Hello For Sorting Students By Marks Descending");
                 Console.WriteLine("=======================================");
 
                 for (int i = 0; i < count - 1; i++)
@@ -235,6 +252,10 @@ namespace SimpleStudentManagementProject
             //======== Delete Student ==========
             static void DeleteStudent()
             {
+                Console.WriteLine("=======================================");
+                Console.WriteLine("Hello For Delete Student");
+                Console.WriteLine("=======================================");
+
                 Console.Write("Enter student name to delete: ");
                 string deleteName = Console.ReadLine().ToLower();
                 bool found = false;
