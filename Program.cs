@@ -49,7 +49,7 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("3. Find Student By Name");
                 Console.WriteLine("4. Calculate Class Average");
                 Console.WriteLine("5. Find Top Performing Student");
-                Console.WriteLine("6. Sort Students By Marks");
+                Console.WriteLine("6. Sort Students By Marks Descending");
                 Console.WriteLine("7. Delete Student");
                 Console.WriteLine("8. Exit");
 
@@ -63,7 +63,7 @@ namespace SimpleStudentManagementProject
                     case 3: FindStudentByName(); break;
                     case 4: CalculateClassAverage(); break;
                     case 5: FindTopPerformingStudent(); break;
-                    case 6: SortStudentsByMarks(); break;
+                    case 6: SortStudentsByMarksDescending(); break;
                     case 7: DeleteStudent(); break;
                     case 8: return;
                     default: Console.WriteLine("Invalid choice! Try again."); break;
@@ -71,40 +71,55 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadLine();
             }
-
+            //======== Add New Student ==========
             static void AddNewStudent()
             {
-                if (count == 10)
+                Console.WriteLine("Add New Student");
+                Console.WriteLine("-----------------");
+                while (true)
                 {
-                    Console.WriteLine("Student database is full!");
-                    return;
-                }
-                else
-                {
-                    Console.Write("Enter student name: ");
-                    string name = Console.ReadLine();
-                    Console.Write("Enter student age: ");
-                    int age = int.Parse(Console.ReadLine());
-                    Console.Write("Enter student marks: ");
-                    double mark = double.Parse(Console.ReadLine());
-                    if (age <= 21)
+                    if (count == 10)
                     {
-                        Console.WriteLine("Age must be greater than 21!");
+                        Console.WriteLine("Student Array is full!");
                         return;
                     }
-                    if (mark < 0 || mark > 100)
+                    else
                     {
-                        Console.WriteLine("Marks must be between 0 and 100!");
-                        return;
+                        Console.Write("Enter student name: ");
+                        string name = Console.ReadLine();
+                        Console.Write("Enter student age: ");
+                        int age = int.Parse(Console.ReadLine());
+                        Console.Write("Enter student marks: ");
+                        double mark = double.Parse(Console.ReadLine());
+                        if (age <= 21)
+                        {
+                            Console.WriteLine("Age must be greater than 21!");
+                            return;
+                        }
+                        if (mark < 0 || mark > 100)
+                        {
+                            Console.WriteLine("Marks must be between 0 and 100!");
+                            return;
+                        }
+                        names[count] = name;
+                        ages[count] = age;
+                        marks[count] = mark;
+                        dates[count] = DateTime.Now;
+                        count++;
+                        Console.WriteLine("Student added successfully!");
                     }
-                    names[count] = name;
-                    ages[count] = age;
-                    marks[count] = mark;
-                    dates[count] = DateTime.Now;
-                    count++;
-                    Console.WriteLine("Student added successfully!");
-                    return;
+                    Console.Write("Do you want to add another student? (yes/no): ");
+                    string choice = Console.ReadLine().ToLower();
+                    if (choice != "yes")
+                    {
+                        break;
+                    }
                 }
+
+
+
+            }
+            //======== View All Students ==========
             static void ViewAllStudents()
             {
                 Console.WriteLine("-------------------------------------------------");
@@ -117,6 +132,7 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("-------------------------------------------------");
 
             }
+            //======== Find Student By Name ==========
             static void FindStudentByName()
             {
                 Console.Write("Enter student name to search: ");
@@ -130,7 +146,7 @@ namespace SimpleStudentManagementProject
                         Console.WriteLine("-------------------------------------------------");
                         Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
                         Console.WriteLine("-------------------------------------------------");
-                        Console.WriteLine($"{names[i].ToLower()}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
+                        Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
                         Console.WriteLine("-------------------------------------------------");
                         found = true;
                         break;
@@ -141,9 +157,9 @@ namespace SimpleStudentManagementProject
                     Console.WriteLine("Student not found!");
                 }
             }
+            //======== Calculate Class Average ==========
             static void CalculateClassAverage()
             {
-
                 double sum = 0;
                 for (int i = 0; i < count; i++)
                 {
@@ -153,6 +169,7 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine($"Class Average: {average}");
 
             }
+            //======== Find Top Performing Student ==========
             static void FindTopPerformingStudent()
             {
 
@@ -174,11 +191,8 @@ namespace SimpleStudentManagementProject
                     Console.WriteLine($"{names[index]}\t{ages[index]}\t{marks[index]}\t{dates[index]}");
                     Console.WriteLine("-------------------------------------------------");
                 }
-                else
-                {
-                    Console.WriteLine("No students found!");
-                }
             }
+            //======== Sort Students By Marks Descending ==========
             static void SortStudentsByMarks()
             {
                 
@@ -215,15 +229,16 @@ namespace SimpleStudentManagementProject
 
 
             }
+            //======== Delete Student ==========
             static void DeleteStudent()
             {
                 Console.Write("Enter student name to delete: ");
-                string delete = Console.ReadLine().ToLower();
+                string deleteName = Console.ReadLine().ToLower();
                 bool found = false;
 
                 for (int i = 0; i < count; i++)
                 {
-                    if (names[i].ToLower() == delete)
+                    if (names[i].ToLower() == deleteName)
                     {
                         for (int j = i; j < count - 1; j++)
                         {
