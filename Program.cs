@@ -73,11 +73,11 @@ namespace SimpleStudentManagementProject
             }
 
             static void AddNewStudent()
-            { 
-
-                if (count > 10)
+            {
+                if (count == 10)
                 {
-                    Console.WriteLine("No more students can be added!");
+                    Console.WriteLine("Student database is full!");
+                    return;
                 }
                 else
                 {
@@ -102,24 +102,20 @@ namespace SimpleStudentManagementProject
                     marks[count] = mark;
                     dates[count] = DateTime.Now;
                     count++;
-                    Console.WriteLine($"Name Added : {name} " + $"\t Age Added : {age} " + $"\t Mark Added : {mark} " + $"\t Date Added : {DateTime.Now} ");
                     Console.WriteLine("Student added successfully!");
+                    return;
                 }
-
-
-            }
             static void ViewAllStudents()
             {
-
                 Console.WriteLine("-------------------------------------------------");
                 Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
                 Console.WriteLine("-------------------------------------------------");
                 for (int i = 0; i < count; i++)
                 {
-
-                    Console.WriteLine($"{names[i].ToUpper()}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
+                    Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
                 }
                 Console.WriteLine("-------------------------------------------------");
+
             }
             static void FindStudentByName()
             {
