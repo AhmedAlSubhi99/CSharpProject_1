@@ -22,7 +22,6 @@ namespace SimpleStudentManagementProject
         static int[] ages = new int[10];
         static double[] marks = new double[10];
         static DateTime[] dates = new DateTime[10];
-        static bool[] isprinted = new bool[10];
         static int count = 0;
 
         static void Main(string[] args)
@@ -76,7 +75,7 @@ namespace SimpleStudentManagementProject
             static void AddNewStudent()
             { 
 
-                if (count == 10)
+                if (count > 10)
                 {
                     Console.WriteLine("No more students can be added!");
                 }
@@ -103,7 +102,7 @@ namespace SimpleStudentManagementProject
                     marks[count] = mark;
                     dates[count] = DateTime.Now;
                     count++;
-
+                    Console.WriteLine($"Name Added : {name} " + $"\t Age Added : {age} " + $"\t Mark Added : {mark} " + $"\t Date Added : {DateTime.Now} ");
                     Console.WriteLine("Student added successfully!");
                 }
 
@@ -148,6 +147,7 @@ namespace SimpleStudentManagementProject
             }
             static void CalculateClassAverage()
             {
+
                 double sum = 0;
                 for (int i = 0; i < count; i++)
                 {
@@ -155,17 +155,18 @@ namespace SimpleStudentManagementProject
                 }
                 double average = Math.Round(sum / count, 2);
                 Console.WriteLine($"Class Average: {average}");
+
             }
             static void FindTopPerformingStudent()
             {
 
-                double maxMarks = 0;
+                double max = 0;
                 int index = -1;
                 for (int i = 0; i < count; i++)
                 {
-                    if (marks[i] > maxMarks)
+                    if (marks[i] > max)
                     {
-                        maxMarks = marks[i];
+                        max = marks[i];
                         index = i;
                     }
                 }
@@ -177,6 +178,10 @@ namespace SimpleStudentManagementProject
                     Console.WriteLine($"{names[index]}\t{ages[index]}\t{marks[index]}\t{dates[index]}");
                     Console.WriteLine("-------------------------------------------------");
                 }
+                else
+                {
+                    Console.WriteLine("No students found!");
+                }
             }
             static void SortStudentsByMarks()
             {
@@ -187,18 +192,18 @@ namespace SimpleStudentManagementProject
                     {
                         if (marks[i] < marks[j])
                         {
-                            double temp = marks[i];
+                            double mark = marks[i];
                             marks[i] = marks[j];
-                            marks[j] = temp;
-                            string tempName = names[i];
+                            marks[j] = mark;
+                            string name = names[i];
                             names[i] = names[j];
-                            names[j] = tempName;
-                            int tempAge = ages[i];
+                            names[j] = name;
+                            int age = ages[i];
                             ages[i] = ages[j];
-                            ages[j] = tempAge;
-                            DateTime tempDate = dates[i];
+                            ages[j] = age;
+                            DateTime date = dates[i];
                             dates[i] = dates[j];
-                            dates[j] = tempDate;
+                            dates[j] = date;
                         }
                     }
                 }
@@ -217,12 +222,12 @@ namespace SimpleStudentManagementProject
             static void DeleteStudent()
             {
                 Console.Write("Enter student name to delete: ");
-                string deleteName = Console.ReadLine().ToLower();
+                string delete = Console.ReadLine().ToLower();
                 bool found = false;
 
                 for (int i = 0; i < count; i++)
                 {
-                    if (names[i].ToLower() == deleteName)
+                    if (names[i].ToLower() == delete)
                     {
                         for (int j = i; j < count - 1; j++)
                         {
