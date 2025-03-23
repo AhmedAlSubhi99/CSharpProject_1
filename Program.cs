@@ -193,7 +193,7 @@ namespace SimpleStudentManagementProject
                 }
             }
             //======== Sort Students By Marks Descending ==========
-            static void SortStudentsByMarks()
+            static void SortStudentsByMarksDescending()
             {
                 
                 for (int i = 0; i < count - 1; i++)
