@@ -37,7 +37,7 @@ namespace SimpleStudentManagementProject
             //7. Delete a student record(handle shifting logic).
             //8. Exit the system
 
-            Console.WriteLine("Cheers!!!.. Student Management System!..");
+            Console.WriteLine("                                          \t Cheers!!!..\n\t                                 Student Management System!..");
             Console.ReadLine();
             // For Buildind Menu of Choices.
             while (true)
@@ -68,7 +68,7 @@ namespace SimpleStudentManagementProject
                     case 8: return;
                     default: Console.WriteLine("Invalid choice! Try again."); break;
                 }
-                Console.WriteLine("Press any key to continue...");
+                Console.WriteLine("\tPress any key to continue...");
                 Console.ReadLine();
             }
             //======== Add New Student ==========
@@ -77,70 +77,75 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("=======================================");
                 Console.WriteLine("Hello For Adding New Student cheers!!(-_-) ");
                 Console.WriteLine("=======================================");
-
-                while (true) // To add more than one student( Multiplie Students ).
+                try
                 {
-                    // To check the array is full or not.
-                    if (count == 10)
+                    while (true) // To add more than one student( Multiplie Students ).
                     {
-                        Console.WriteLine("Student Array is full!");
-                        return;
-                    }
-                    // To add the new student details.
-                    else
-                    {
-                        Console.Write("Enter student name: "); // To take the student name.
-                        string name = Console.ReadLine(); // To read the student name.
-                        Console.Write("Enter student age: "); // To take the student age.
-                        int age = int.Parse(Console.ReadLine()); // To read the student age.
-                        Console.Write("Enter student marks: "); // To take the student marks.
-                        double mark = double.Parse(Console.ReadLine()); // To read the student marks.
-                        // To check the (Age / Mark) details are valid or not.
-                        if (age <= 21) // To check the age is greater than 21.
+                        // To check the array is full or not.
+                        if (count == 10)
                         {
-                            Console.WriteLine("Age must be greater than 21!");
+                            Console.WriteLine("Student Array is full!");
                             return;
                         }
-                        if (mark < 0 || mark > 100) // To check the marks are between 0 and 100.
+                        // To add the new student details.
+                        else
                         {
-                            Console.WriteLine("Marks must be between 0 and 100!");
-                            return;
+                            Console.Write("Enter student name: "); // To take the student name.
+                            string name = Console.ReadLine(); // To read the student name.
+                            Console.Write("Enter student age: "); // To take the student age.
+                            int age = int.Parse(Console.ReadLine()); // To read the student age.
+                            Console.Write("Enter student marks: "); // To take the student marks.
+                            double mark = double.Parse(Console.ReadLine()); // To read the student marks.
+                                                                            // To check the (Age / Mark) details are valid or not.
+                            if (age <= 21) // To check the age is greater than 21.
+                            {
+                                Console.WriteLine("Age must be greater than 21!");
+                                return;
+                            }
+                            if (mark < 0 || mark > 100) // To check the marks are between 0 and 100.
+                            {
+                                Console.WriteLine("Marks must be between 0 and 100!");
+                                return;
+                            }
+                            names[count] = name; // To store the student name.
+                            ages[count] = age; // To store the student age.
+                            marks[count] = mark; // To store the student marks.
+                            dates[count] = DateTime.Now; // To store the student enrollment date.
+                            count++; // To increment the count by 1 .
+                            Console.WriteLine("Student added successfully!");
                         }
-                        names[count] = name; // To store the student name.
-                        ages[count] = age; // To store the student age.
-                        marks[count] = mark; // To store the student marks.
-                        dates[count] = DateTime.Now; // To store the student enrollment date.
-                        count++; // To increment the count by 1 .
-                        Console.WriteLine("Student added successfully!");
+                        Console.Write("Do you want to add another student? (yes/no): ");
+                        string choice = Console.ReadLine().ToLower(); // To read the choice.
+                        if (choice != "yes") // To check the choice is not equal to "yes".
+                        {
+                            break;
+                        }
                     }
-                    Console.Write("Do you want to add another student? (yes/no): ");
-                    string choice = Console.ReadLine().ToLower(); // To read the choice.
-                    if (choice != "yes") // To check the choice is not equal to "yes".
-                    {
-                        break;
-                    }
-                }
 
-
-
+                } 
+                catch (Exception ex) { Console.WriteLine("Can't add New Students due to : " + ex.Message); }
             }
             //======== View All Students ==========
             static void ViewAllStudents()
             {
-                Console.WriteLine("=======================================");
-                Console.WriteLine("Hello For Viewing All Students");
-                Console.WriteLine("=======================================");
-
-                Console.WriteLine("-------------------------------------------------");
-                Console.WriteLine("Name\tAge\tMarks\tEnrollment Date"); // To display the student details.
-                Console.WriteLine("-------------------------------------------------");
-                // To display the student details.
-                for (int i = 0; i < count; i++)
+                try
                 {
-                    Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
-                }
-                Console.WriteLine("-------------------------------------------------");
+                    Console.WriteLine("=======================================");
+                    Console.WriteLine("Hello For Viewing All Students");
+                    Console.WriteLine("=======================================");
 
+                    Console.WriteLine("-------------------------------------------------");
+                    Console.WriteLine("Name\tAge\tMarks\tEnrollment Date"); // To display the student details.
+                    Console.WriteLine("-------------------------------------------------");
+                    // To display the student details.
+                    for (int i = 0; i < count; i++)
+                    {
+                        Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
+                    }
+                    Console.WriteLine("-------------------------------------------------");
+
+                } 
+                catch (Exception ex) { Console.WriteLine("Can't View Students due to :" + ex.Message); }
             }
             //======== Find Student By Name ==========
             static void FindStudentByName()
@@ -149,27 +154,31 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("Hello For Find Student By Name");
                 Console.WriteLine("=======================================");
 
-                Console.Write("Enter student name to search: ");
-                string searchName = Console.ReadLine().ToLower();
-                bool found = false; // To check the student is found or not.
-
-                for (int i = 0; i < count; i++) // To search the student by name.
+                try
                 {
-                    if (names[i].ToLower() == searchName) // To check the student name is equal to search name.
+                    Console.Write("Enter student name to search: ");
+                    string searchName = Console.ReadLine().ToLower();
+                    bool found = false; // To check the student is found or not.
+
+                    for (int i = 0; i < count; i++) // To search the student by name.
                     {
-                        Console.WriteLine("-------------------------------------------------");
-                        Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
-                        Console.WriteLine("-------------------------------------------------");
-                        Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
-                        Console.WriteLine("-------------------------------------------------");
-                        found = true; // To set the found as true.
-                        break; // To break the loop.
+                        if (names[i].ToLower() == searchName) // To check the student name is equal to search name.
+                        {
+                            Console.WriteLine("-------------------------------------------------");
+                            Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
+                            Console.WriteLine("-------------------------------------------------");
+                            Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
+                            Console.WriteLine("-------------------------------------------------");
+                            found = true; // To set the found as true.
+                            break; // To break the loop.
+                        }
+                    }
+                    if (!found) // To check the student is not found.
+                    {
+                        Console.WriteLine("Student not found!");
                     }
                 }
-                if (!found) // To check the student is not found.
-                {
-                    Console.WriteLine("Student not found!");
-                }
+                catch (Exception ex) { Console.WriteLine("Can't Find Student due to :" + ex.Message ); }
             }
             //======== Calculate Class Average ==========
             static void CalculateClassAverage()
@@ -178,14 +187,18 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("Hello For Calculate Class Average");
                 Console.WriteLine("=======================================");
 
-                double sum = 0; // To store the sum of marks.
-                for (int i = 0; i < count; i++) // To calculate the sum of marks.
+                try
                 {
-                    sum += marks[i]; // To add the marks to sum. Or sum = sum + marks[i];
-                }
-                double average = Math.Round(sum / count, 2); // To calculate the average of marks.
-                Console.WriteLine($"Class Average: {average}"); // To display the class average.
+                    double sum = 0; // To store the sum of marks.
+                    for (int i = 0; i < count; i++) // To calculate the sum of marks.
+                    {
+                        sum += marks[i]; // To add the marks to sum. Or sum = sum + marks[i];
+                    }
+                    double average = Math.Round(sum / count, 2); // To calculate the average of marks.
+                    Console.WriteLine($"Class Average: {average}"); // To display the class average.
 
+                }
+                catch (Exception ex) { Console.WriteLine("Can't Calculate Class Average due to : " + ex.Message); }
             }
             //======== Find Top Performing Student ==========
             static void FindTopPerformingStudent()
@@ -194,24 +207,28 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("Hello For Finding Top Performing Student");
                 Console.WriteLine("=======================================");
 
-                double max = 0; // To store the maximum marks.
-                int index = -1; // To store the index of top performing student.
-                for (int i = 0; i < count; i++) // To find the top performing student.
+                try
                 {
-                    if (marks[i] > max) // To check the marks is greater than max.
+                    double max = 0; // To store the maximum marks.
+                    int index = -1; // To store the index of top performing student.
+                    for (int i = 0; i < count; i++) // To find the top performing student.
                     {
-                        max = marks[i]; // To store the marks to max.
-                        index = i; // To store the index to i.
+                        if (marks[i] > max) // To check the marks is greater than max.
+                        {
+                            max = marks[i]; // To store the marks to max.
+                            index = i; // To store the index to i.
+                        }
                     }
-                }
-                if (index != -1) // To check the index is not equal to -1.
-                {
-                    Console.WriteLine("-------------------------------------------------");
-                    Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
-                    Console.WriteLine("-------------------------------------------------");
-                    Console.WriteLine($"{names[index]}\t{ages[index]}\t{marks[index]}\t{dates[index]}");
-                    Console.WriteLine("-------------------------------------------------");
-                }
+                    if (index != -1) // To check the index is not equal to -1.
+                    {
+                        Console.WriteLine("-------------------------------------------------");
+                        Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
+                        Console.WriteLine("-------------------------------------------------");
+                        Console.WriteLine($"{names[index]}\t{ages[index]}\t{marks[index]}\t{dates[index]}");
+                        Console.WriteLine("-------------------------------------------------");
+                    }
+                } 
+                catch (Exception e) { Console.WriteLine("Can't Find Top Performing Student due to :" + e.Message); }
             }
             //======== Sort Students By Marks Descending ==========
             static void SortStudentsByMarksDescending()
@@ -220,39 +237,42 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("Hello For Sorting Students By Marks Descending");
                 Console.WriteLine("=======================================");
 
-                // To sort the students by marks descending.
-                for (int i = 0; i < count - 1; i++) // For loop to sort the students.
+                try
                 {
-                    for (int j = i + 1; j < count; j++) // To make loop for sorting.
+                    // To sort the students by marks descending.
+                    for (int i = 0; i < count - 1; i++) // For loop to sort the students.
                     {
-                        if (marks[i] < marks[j]) // To check the marks is less than marks.
+                        for (int j = i + 1; j < count; j++) // To make loop for sorting.
                         {
-                            double mark = marks[i]; // To store the marks to mark.
-                            marks[i] = marks[j]; // To Store the marks[j] to marks[i].
-                            marks[j] = mark; // To store the mark to marks[j].
-                            string name = names[i]; // To store the name to name[i].
-                            names[i] = names[j]; // To store the names[j] to names[i].
-                            names[j] = name; // To store the name to names[j].
-                            int age = ages[i]; // To store the age to age[i].
-                            ages[i] = ages[j]; // To store the ages[j] to ages[i].
-                            ages[j] = age; // To store the age to ages[j].
-                            DateTime date = dates[i]; // To store the date to date[i].
-                            dates[i] = dates[j]; // To store the dates[j] to dates[i].
-                            dates[j] = date; // To store the date to dates[j].
+                            if (marks[i] < marks[j]) // To check the marks is less than marks.
+                            {
+                                double mark = marks[i]; // To store the marks to mark.
+                                marks[i] = marks[j]; // To Store the marks[j] to marks[i].
+                                marks[j] = mark; // To store the mark to marks[j].
+                                string name = names[i]; // To store the name to name[i].
+                                names[i] = names[j]; // To store the names[j] to names[i].
+                                names[j] = name; // To store the name to names[j].
+                                int age = ages[i]; // To store the age to age[i].
+                                ages[i] = ages[j]; // To store the ages[j] to ages[i].
+                                ages[j] = age; // To store the age to ages[j].
+                                DateTime date = dates[i]; // To store the date to date[i].
+                                dates[i] = dates[j]; // To store the dates[j] to dates[i].
+                                dates[j] = date; // To store the date to dates[j].
+                            }
                         }
                     }
-                }
-
-                Console.WriteLine("-------------------------------------------------");
-                Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
-                Console.WriteLine("-------------------------------------------------");
-                for (int i = 0; i < count; i++) // To display the sorted students.
-                {
-                    Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
-                }
-                Console.WriteLine("-------------------------------------------------");
 
 
+                    Console.WriteLine("-------------------------------------------------");
+                    Console.WriteLine("Name\tAge\tMarks\tEnrollment Date");
+                    Console.WriteLine("-------------------------------------------------");
+                    for (int i = 0; i < count; i++) // To display the sorted students.
+                    {
+                        Console.WriteLine($"{names[i]}\t{ages[i]}\t{marks[i]}\t{dates[i]}");
+                    }
+                    Console.WriteLine("-------------------------------------------------");
+                } 
+                catch (Exception e) {Console.WriteLine("Can't Sorting Students due to :" + e.Message);}
             }
             //======== Delete Student ==========
             static void DeleteStudent()
@@ -261,32 +281,36 @@ namespace SimpleStudentManagementProject
                 Console.WriteLine("Hello For Delete Student");
                 Console.WriteLine("=======================================");
 
-                // To delete the student by name.
-                Console.Write("Enter student name to delete: ");
-                string deleteName = Console.ReadLine().ToLower();
-                bool found = false; // To check the student is found or not.
+                try
+                {
+                    // To delete the student by name.
+                    Console.Write("Enter student name to delete: ");
+                    string deleteName = Console.ReadLine().ToLower();
+                    bool found = false; // To check the student is found or not.
 
-                for (int i = 0; i < count; i++) // To loop through the students.
-                {
-                    if (names[i].ToLower() == deleteName) // To check the student name is equal to delete name.
+                    for (int i = 0; i < count; i++) // To loop through the students.
                     {
-                        for (int j = i; j < count - 1; j++) // to loop for shift the students.
+                        if (names[i].ToLower() == deleteName) // To check the student name is equal to delete name.
                         {
-                            names[j] = names[j + 1]; // To shift the names to left.
-                            ages[j] = ages[j + 1]; // To shift the ages to left.
-                            marks[j] = marks[j + 1]; // To shift the marks to left.
-                            dates[j] = dates[j + 1]; // To shift the dates to left.
+                            for (int j = i; j < count - 1; j++) // to loop for shift the students.
+                            {
+                                names[j] = names[j + 1]; // To shift the names to left.
+                                ages[j] = ages[j + 1]; // To shift the ages to left.
+                                marks[j] = marks[j + 1]; // To shift the marks to left.
+                                dates[j] = dates[j + 1]; // To shift the dates to left.
+                            }
+                            count--; // To decrement the count by 1.
+                            Console.WriteLine("Student deleted successfully!");
+                            found = true; // To set the found as true.
+                            break; // To break the loop.
                         }
-                        count--; // To decrement the count by 1.
-                        Console.WriteLine("Student deleted successfully!");
-                        found = true; // To set the found as true.
-                        break; // To break the loop.
                     }
-                }
-                if (!found) // To check the student is not found.
-                {
-                    Console.WriteLine("Student not found!");
-                }
+                    if (!found) // To check the student is not found.
+                    {
+                        Console.WriteLine("Student not found!");
+                    }
+                } 
+                catch (Exception e) {Console.WriteLine(" Can't Delete Students due to :" + e.Message);}
             }
 
         }
